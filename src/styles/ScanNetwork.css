@@ -1,0 +1,77 @@
+.earn-crypto-section {
+  color: white;
+  overflow: hidden;
+}
+
+.earn-crypto-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
+}
+
+.earn-crypto-content {
+  flex: 1;
+}
+
+.earn-crypto-content h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 4rem;
+  font-weight: bold;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+}
+
+.earn-highlight {
+  color: #ff0000;
+}
+
+.earn-crypto-content p {
+  font-size: 1.1rem;
+  color: #cccccc;
+}
+
+.earn-button-container {
+  margin-top: 2rem;
+}
+
+.earn-presale-btn {
+  background: transparent;
+  border: 2px solid #f7f2f2;
+  color: #ff0000;
+  padding: 12px 32px;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.earn-presale-btn:hover {
+  background: #ff0000;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+}
+
+.earn-preview {
+  padding-right: 10%;
+}
+
+@media (max-width: 1200px) {
+  .earn-crypto-content h2 {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .earn-crypto-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .earn-crypto-content h2 {
+    font-size: 2.5rem;
+  }
+}

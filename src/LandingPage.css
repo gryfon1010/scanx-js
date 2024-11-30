@@ -1,6 +1,6 @@
 /* Reset default margins and padding */
 * {
-  margin: 0;
+ 
   padding: 5px;
   box-sizing: border-box;
 }
@@ -92,18 +92,13 @@ body {
   background: #cc0000;
 }
 
-.left-section {
-  flex: 1;
-  max-width: 600px;
-}
-
 .title {
-  font-size: clamp(5rem, 5vw, 3.5rem);
-  margin-bottom: 1.5rem;
+  font-size: clamp(4rem, 5vw, 3.5rem);
+  margin-bottom: 1rem;
   font-weight: bold;
   white-space: nowrap;
   font-family: "orbitron";
-  line-height: 0.9;
+  line-height: 1;
 }
 
 .highlight {
@@ -124,14 +119,13 @@ body {
 
 .join-button {
   background: transparent;
-  border: 2px solid #ff0000;
+  border: 2px solid #fcf8f8;
   color: #ff0000;
   padding: 12px 32px;
   border-radius: 30px;
   font-size: 1.1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin: 0 auto;
   display: block;
 }
 
@@ -142,6 +136,7 @@ body {
 
 .right-section {
   padding-right: 10%;
+  padding-top: 3%;
 
 }
 

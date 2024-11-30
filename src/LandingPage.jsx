@@ -11,6 +11,7 @@ import bnb from './assets/bnb.png';
 import polygon from './assets/polygon.png';
 import avalanche from './assets/avalanche.png';
 import UnlimitedPotential from './components/UnlimitedPotential';
+import EarnCrypto from './scannetwork.jsx';
 
 const Navbar = ({ onConnectWallet }) => {
   return (
@@ -133,7 +134,7 @@ const LandingPage = ({ onConnectWallet }) => {
   return (
     <div className="landing-container">
       <Navbar onConnectWallet={onConnectWallet} />
-      <div style={{ height: '5rem' }} />
+      <div style={{  }} />
       <div className="content-wrapper">
         <div className="left-section">
           <h1 className="title">
@@ -199,6 +200,7 @@ const LandingPage = ({ onConnectWallet }) => {
       </div>
       <WhatIsScanX />
       <UnlimitedPotential />
+      <EarnCrypto/>
      
     </div>
   );

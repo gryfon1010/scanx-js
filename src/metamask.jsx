@@ -294,7 +294,7 @@ const MetaMask = () => {
     };
 
     return (
-        <div style={{ padding: "20px" }}>
+        <div style={{ padding: "20px"}}>
             <h2>Wallet Connection</h2>
             <div style={{ marginBottom: "10px" }}>
                 Connection Status: {isConnected ? "Connected" : "Disconnected"}

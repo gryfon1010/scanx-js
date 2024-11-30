@@ -28,8 +28,9 @@ const WalletConnect = () => {
     <div className="App">
       <LandingPage onConnectWallet={handleConnectWallet} />
       {showWalletModal && (
-        <WalletModal onClose={() => setShowWalletModal(false)} />
-      )}
+        <WalletModal style={{background: 'rgba(0, 0, 0, 0.5)'}} onClose={() => setShowWalletModal(false)} />
+      )
+      }
     </div>
   );
 };
