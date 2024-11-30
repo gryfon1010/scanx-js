@@ -4,6 +4,13 @@ import coinpediaLogo from './assets/coinpedia.png';
 import cryptoNewsLogo from './assets/crypto-news.png';
 import coinMarketCapLogo from './assets/coinmarketcap.png';
 import cryptoDailyLogo from './assets/crypto-daily.png';
+import exchangePreview from './assets/exchange-preview.png';
+import solana from './assets/solana.png';
+import ethereum from './assets/ethereum.png';
+import bnb from './assets/bnb.png';
+import polygon from './assets/polygon.png';
+import avalanche from './assets/avalanche.png';
+import UnlimitedPotential from './components/UnlimitedPotential';
 
 const Navbar = ({ onConnectWallet }) => {
   return (
@@ -32,7 +39,7 @@ const Countdown = () => {
   });
 
   useEffect(() => {
-    const targetDate = new Date('2024-12-29T23:59:59').getTime();
+    const targetDate = new Date('2024-12-01T23:59:59').getTime();
 
     const updateCountdown = () => {
       const now = new Date().getTime();
@@ -81,6 +88,44 @@ const Countdown = () => {
         <span className="label">Seconds</span>
       </div>
     </div>
+  );
+};
+
+const WhatIsScanX = () => {
+  return (
+    <section className="what-is-scanx">
+      <div className="content-wrapper">
+        <div className='what-is-scanx-image'>
+          <div className="what-is-scanx-text-buttons">
+        <h2>What is Scan<span className="highlight-x">X</span> ?</h2>
+        <p>
+          ScanX is a Web3 multi-chain bridge network leveraging a non-custodial protocol for 
+          instant cross-chain transactions. By accessing deep liquidity and enabling seamless 
+          asset transfers across different blockchains, ScanX offers a cost-efficient, scalable 
+          alternative to traditional CEXs for DeFi traders and liquidity providers
+        </p>
+        <div className="action-buttons">
+          <button className="join-presale">Join Presale</button>
+          <button className="whitepaper">WhitePaper</button>
+        </div>
+        <div className="cross-chain">
+          <span className="label">Cross-Chain Processing</span>
+          <div className="chain-icons">
+            <img src={solana} alt="Solana" />
+            <img src={ethereum} alt="Ethereum" />
+            <img src={bnb} alt="BNB" />
+            <img src={polygon} alt="Polygon" />
+            <img src={avalanche} alt="Avalanche" />
+          </div>
+          </div>
+          </div>
+          <div className="exchange-preview">
+          <img src={exchangePreview} alt="Exchange Interface Preview" />
+        </div>
+        </div>
+        
+      </div>
+    </section>
   );
 };
 
@@ -152,6 +197,9 @@ const LandingPage = ({ onConnectWallet }) => {
           <img src={cryptoDailyLogo} alt="Crypto Daily" />
         </div>
       </div>
+      <WhatIsScanX />
+      <UnlimitedPotential />
+     
     </div>
   );
 };

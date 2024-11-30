@@ -1,7 +1,7 @@
 /* Reset default margins and padding */
 * {
   margin: 0;
-  padding: 0;
+  padding: 5px;
   box-sizing: border-box;
 }
 
@@ -14,7 +14,6 @@ body {
 .landing-container {
   background: linear-gradient(to right, #000000, #1a0000);
   min-height: 100vh;
-  width: 100%;
   color: white;
   padding: 2rem;
   font-family: 'Orbitron', sans-serif;
@@ -23,15 +22,13 @@ body {
 }
 
 .content-wrapper {
-  flex: 1;
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: space-between;
-  gap: 2rem;
-  max-width: 1440px;
-  margin: 0 auto;
+  align-items: center;
   width: 100%;
+  gap: 4rem;
+
 }
 
 .navbar {
@@ -67,6 +64,7 @@ body {
 .nav-links {
   display: flex;
   gap: 30px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .nav-links a {
@@ -100,16 +98,18 @@ body {
 }
 
 .title {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  line-height: 1.2;
+  font-size: clamp(5rem, 5vw, 3.5rem);
   margin-bottom: 1.5rem;
-  text-align: center;
+  font-weight: bold;
   white-space: nowrap;
+  font-family: "orbitron";
+  line-height: 0.9;
 }
 
 .highlight {
   color: #ff0000;
   display: block;
+  line-height: 0.9;
 }
 
 .description {
@@ -119,7 +119,7 @@ body {
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
-  text-align: center;
+  font-family: "calibri"
 }
 
 .join-button {
@@ -141,10 +141,8 @@ body {
 }
 
 .right-section {
-  flex: 1;
-  max-width: 450px;
-  display: flex;
-  justify-content: flex-end;
+  padding-right: 10%;
+
 }
 
 .calculator-card {
@@ -281,7 +279,8 @@ body {
 .media-section h2 {
   color: #ff0000;
   margin-bottom: 30px;
-  font-size: 1.5rem;
+  font-size: 1rem;
+  font-family: 'Press Start 2P', cursive;
 }
 
 .media-logos {
@@ -365,80 +364,124 @@ body {
   z-index: 999;
 }
 
-@media (max-width: 1200px) {
-  .content-wrapper {
-    flex-direction: column;
-    text-align: center;
-    padding: 2rem;
-    gap: 3rem;
-  }
+.what-is-scanx {
+  background-color: #000;
+  color: #fff;
+  padding: 80px 0;
 
-  .left-section, .right-section {
-    max-width: 100%;
-  }
-
-  .right-section {
-    justify-content: center;
-  }
-
-  .description {
-    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-    padding: 0 1rem;
-  }
-
-  .title {
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-    white-space: normal;
-  }
 }
 
-@media (max-width: 768px) {
-  .landing-container {
-    padding: 1rem;
-  }
-
-  .content-wrapper {
-    padding: 1rem;
-  }
-
-  .title {
-    font-size: clamp(1.5rem, 3.5vw, 2rem);
-  }
-
-  .calculator-card {
-    width: 90%;
-    margin: 0 auto;
-  }
+.what-is-scanx .content-wrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-@media screen and (max-width: 480px) {
-  html {
-    font-size: 14px;
-  }
-
-  .title {
-    font-size: clamp(1.2rem, 3vw, 1.8rem);
-  }
-
-  .description {
-    font-size: 0.9rem;
-  }
+.what-is-scanx h2 {
+  font-size: 68px;
+  font-weight: 700;
+  margin-bottom: 1px;
+  color: #fff;
+  position: relative;
+  width: 100%;
+  text-align: left;
 }
 
-@media (max-width: 400px) {
-  .calculator-card {
-    padding: 20px;
-  }
-
-  .time-block {
-    padding: 8px 4px;
-  }
-
-  .time-block .number {
-    font-size: 1.5rem;
-  }
-
-  .input-fields input {
-    padding: 10px;
-  }
+.what-is-scanx h2 .highlight-x {
+  color: #ff0000;
 }
+
+.what-is-scanx h2::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background-color: #ff0000;
+}
+
+.what-is-scanx p {
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 600px;
+  margin-bottom: 40px;
+  color: #ccc;
+}
+
+.what-is-scanx .action-buttons {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 40px;
+  align-self: flex-start;
+}
+
+.what-is-scanx button {
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.what-is-scanx .join-presale {
+  background-color: transparent;
+  color: #ff0000;
+  border: 2px solid #f0ebeb;
+}
+
+.what-is-scanx .whitepaper {
+  background-color: transparent;
+  color: #ff0000;
+  border: 2px solid #f0eded;
+}
+
+.what-is-scanx .cross-chain {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.what-is-scanx .label {
+  font-size: 18px;
+  color: #fff;
+  white-space: nowrap;
+  font-weight: bold;  
+}
+
+.what-is-scanx .chain-icons {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.what-is-scanx .chain-icons img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.what-is-scanx-image {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 4rem;
+}
+
+.what-is-scanx-text-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  flex: 1;
+  max-width: 50%;
+}
+
+

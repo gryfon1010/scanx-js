@@ -1,0 +1,249 @@
+.unlimited-potential {
+  background: linear-gradient(to right, #000000, #1a0000);
+  padding: 6rem 0 8rem;
+  color: white;
+ 
+}
+
+.unlimited-potential::before {
+  content: '';
+  background: radial-gradient(circle at center, rgba(255, 0, 0, 0.15), transparent 70%);
+  pointer-events: none;
+}
+
+.unlimited-header {
+  text-align: left;
+
+  margin-bottom: 4rem;
+}
+
+.unlimited-header h3 {
+  color: #ff0000;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.unlimited-header h1 {
+  font-size: 4rem;
+  font-weight: bold;
+  font-family: 'Orbitron', sans-serif;
+  line-height: 1.2;
+  background: linear-gradient(to right, #ffffff 60%, #ff0000);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.benefits-slider {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  padding: 0 10%;
+  position: relative;
+}
+
+.benefit-slide {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  opacity: 0.5;
+  transform: scale(0.95);
+}
+
+.benefit-slide.active {
+  opacity: 1;
+  transform: scale(1);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.1);
+}
+
+.benefit-icon {
+  margin-bottom: 2rem;
+}
+
+.benefit-icon svg {
+  width: 100%;
+  height: auto;
+  max-width: 120px;
+}
+
+.benefit-info {
+  text-align: left;
+}
+
+.benefit-label {
+  color: #ff0000;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+  font-family: 'Orbitron', sans-serif;
+  display: block;
+}
+
+.benefit-title {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(to right, #ffffff 60%, #ff0000);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.benefit-description {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.slider-controls {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  gap: 2rem;
+  margin-top: 4rem;
+  padding-right: 10%;
+  z-index: 10;
+}
+
+.control-button {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #ff0000;
+  background: rgba(255, 0, 0, 0.1);
+  color: #ff0000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  font-size: 24px;
+  transform: scale(0.9);
+}
+
+.control-button:hover {
+  background: #ff0000;
+  color: white;
+  transform: scale(1);
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+}
+
+.control-button.active {
+  transform: scale(1.1);
+  background: #ff0000;
+  color: white;
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+}
+
+.control-button.active:hover {
+  transform: scale(1.15);
+}
+
+.control-button svg {
+  width: 30px;
+  height: 30px;
+}
+
+.slider-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 4rem;
+}
+
+.slider-controls {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  justify-content: flex-end;
+  padding-right: 10%;
+  width: 100%;
+}
+
+.card-counter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.2rem;
+}
+
+.card-counter .current {
+  color: #ff0000;
+  font-weight: bold;
+}
+
+.card-counter .separator {
+  opacity: 0.5;
+}
+
+.pagination-dots {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.pagination-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.pagination-dot:hover {
+  background: rgba(255, 0, 0, 0.5);
+}
+
+.pagination-dot.active {
+  background: #ff0000;
+  transform: scale(1.2);
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+}
+
+@media (max-width: 1400px) {
+  .benefits-slider {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .benefits-slider {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .unlimited-header h1 {
+    font-size: 2.5rem;
+  }
+
+  .benefit-slide {
+    padding: 1.5rem;
+  }
+
+  .benefit-title {
+    font-size: 1.5rem;
+  }
+
+  .slider-controls {
+    padding-right: 5%;
+  }
+  
+  .pagination-dots {
+    gap: 0.5rem;
+  }
+  
+  .pagination-dot {
+    width: 10px;
+    height: 10px;
+  }
+}
