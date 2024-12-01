@@ -75,3 +75,58 @@
     font-size: 2.5rem;
   }
 }
+
+.exchange-swap-content {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+
+  gap: 2rem;
+}
+
+.exchange-subtitle {
+  color: #ff0000;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.exchange-header h2 {
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  font-family: "orbitron", sans-serif;
+}
+
+.exchange-description {
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.exchange-features p {
+  color: #ff0000;
+  margin-bottom: 1rem;
+}
+
+.exchange-text-content {
+  flex: 1;
+}
+
+.exchange-preview {
+  flex: 1;
+}
+
+.exchange-preview img {
+  max-width: 100%;
+  height: auto;
+}
+
+.features-list {
+  margin: 2rem 0;
+}
+
+.features-list p {
+  color: #ff0000;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}

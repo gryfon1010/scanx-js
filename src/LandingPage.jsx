@@ -98,7 +98,7 @@ const WhatIsScanX = () => {
       <div className="content-wrapper">
         <div className='what-is-scanx-image'>
           <div className="what-is-scanx-text-buttons">
-        <h2>What is Scan<span className="highlight-x">X</span> ?</h2>
+        <h2>What is Scan<span className="highlight-x">X</span>?</h2>
         <p>
           ScanX is a Web3 multi-chain bridge network leveraging a non-custodial protocol for 
           instant cross-chain transactions. By accessing deep liquidity and enabling seamless 
