@@ -131,79 +131,121 @@ const WhatIsScanX = () => {
 };
 
 const LandingPage = ({ onConnectWallet }) => {
-  return (
-    <div className="landing-container">
-      <Navbar onConnectWallet={onConnectWallet} />
-      <div style={{  }} />
-      <div className="content-wrapper">
-        <div className="left-section">
-          <h1 className="title">
-            Enabling Effortless
-            <br />
-            Cross-Chain
-            <br />
-            <span className="highlight">
-              Transactions with
-              <br />
-              Fluid Liquidity
-            </span>
-          </h1>
-          <p className="description">
-            ScanX is disrupting the DeFi world with our interconnected ecosystem. We
-            aim to provide users with effortless Cross-Chain Asset Transfers -
-            Fast,Secure,and Non- Custodial
-          </p>
-          <button className="join-button">
-            Join Presale
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const renderMobileContent = () => {
+    return (
+      <div className="landing-container mobile-view">
+        <Navbar onConnectWallet={onConnectWallet} />
+        
+        <section className="mobile-hero">
+          <h1>ScanX Network</h1>
+          <p>Simplified Blockchain Scanning</p>
+          <Countdown />
+          
+          <button className="buy-button" onClick={onConnectWallet}>
+            Connect Wallet
           </button>
-        </div>
-        <div className="right-section">
-          <div className="calculator-card">
-            <div className="token-price">
-              <span>1 SCANX = $ 0.0011</span>
-            </div>
-            
-            <Countdown />
+        </section>
 
-            <div className="progress-container">
-              <div className="progress-bar">
-                <div className="progress"></div>
-              </div>
-              <div className="progress-labels">
-                <span>USDT Raised: $0</span>
-                <span>$500,000</span>
-              </div>
-            </div>
+        <section className="mobile-features">
+          <h2>Key Features</h2>
+          <div className="feature-list">
+            <div className="feature-item">🌐 Multi-Chain Support</div>
+            <div className="feature-item">🔒 Secure Wallet Integration</div>
+            <div className="feature-item">⚡ Fast Network Scanning</div>
+          </div>
+        </section>
+      </div>
+    );
+  };
 
-            <div className="input-fields">
-              <input type="text" placeholder="USDT (min)" />
-              <input type="text" placeholder="Max Extra" />
-              <input type="text" placeholder="Your Ethereum Address" />
-              <div className="amount-row">
-                <input type="text" placeholder="Amount ($)" />
-                <input type="text" placeholder="Pay with ETH" />
+  const renderDesktopContent = () => {
+    return (
+      <div className="landing-container">
+        <Navbar onConnectWallet={onConnectWallet} />
+        
+        <div className="content-wrapper">
+          <div className="left-section">
+            <h1 className="title">
+              Enabling Effortless
+              <br />
+              Cross-Chain
+              <br />
+              <span className="highlight">
+                Transactions with
+                <br />
+                Fluid Liquidity
+              </span>
+            </h1>
+            <p className="description">
+              ScanX is disrupting the DeFi world with our interconnected ecosystem. We
+              aim to provide users with effortless Cross-Chain Asset Transfers -
+              Fast,Secure,and Non- Custodial
+            </p>
+            <button className="join-button">
+              Join Presale
+            </button>
+          </div>
+          <div className="right-section">
+            <div className="calculator-card">
+              <div className="token-price">
+                <span>1 SCANX = $ 0.0011</span>
               </div>
-              <input type="text" placeholder="Your Referral (Optional)" />
-              <button className="buy-button">Buy Extra Now</button>
+              
+              <Countdown />
+
+              <div className="progress-container">
+                <div className="progress-bar">
+                  <div className="progress"></div>
+                </div>
+                <div className="progress-labels">
+                  <span>USDT Raised: $0</span>
+                  <span>$500,000</span>
+                </div>
+              </div>
+
+              <div className="input-fields">
+                <input type="text" placeholder="USDT (min)" />
+                <input type="text" placeholder="Max Extra" />
+                <input type="text" placeholder="Your Ethereum Address" />
+                <div className="amount-row">
+                  <input type="text" placeholder="Amount ($)" />
+                  <input type="text" placeholder="Pay with ETH" />
+                </div>
+                <input type="text" placeholder="Your Referral (Optional)" />
+                <button className="buy-button">Buy Extra Now</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="media-section">
-        <h2>AS SEEN IN THE MEDIA</h2>
-        <div className="media-logos">
-          <img src={coinpediaLogo} alt="Coinpedia" />
-          <img src={cryptoNewsLogo} alt="Crypto News" />
-          <img src={coinMarketCapLogo} alt="CoinMarketCap" />
-          <img src={cryptoDailyLogo} alt="Crypto Daily" />
+        <div className="media-section">
+          <h2>AS SEEN IN THE MEDIA</h2>
+          <div className="media-logos">
+            <img src={coinpediaLogo} alt="Coinpedia" />
+            <img src={cryptoNewsLogo} alt="Crypto News" />
+            <img src={coinMarketCapLogo} alt="CoinMarketCap" />
+            <img src={cryptoDailyLogo} alt="Crypto Daily" />
+          </div>
         </div>
-      </div>
-      <WhatIsScanX />
-      <UnlimitedPotential />
-      <EarnCrypto/>
+        <WhatIsScanX />
+        <UnlimitedPotential />
+        <EarnCrypto/>
      
-    </div>
-  );
+      </div>
+    );
+  };
+
+  return isMobile ? renderMobileContent() : renderDesktopContent();
 };
 
 export default LandingPage;
