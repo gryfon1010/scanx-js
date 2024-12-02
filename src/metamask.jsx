@@ -1,6 +1,19 @@
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 
+/**
+ * React component to connect to a MetaMask wallet and send cryptocurrency.
+ *
+ * Features:
+ * - Connects to a MetaMask wallet
+ * - Checks the connection status
+ * - Gets the user's balance
+ * - Allows the user to send cryptocurrency
+ * - Allows the user to switch networks (Ethereum Mainnet, Sepolia Testnet)
+ * - Allows the user to select the currency (ETH, SOL - coming soon)
+ *
+ * @returns {JSX.Element} The React component
+ */
 const MetaMask = () => {
     const [errorMessage, setErrorMessage] = useState(null);
     const [userBalance, setUserBalance] = useState(null);

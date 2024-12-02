@@ -10,8 +10,6 @@ const WalletModal = ({ onClose }) => {
       <div className="modal-overlay" onClick={onClose} />
       <div className="wallet-modal">
         <button className="close-button" onClick={onClose}>×</button>
-        <MetaMask />
-        <Phantom />
       </div>
     </>
   );
@@ -27,10 +25,7 @@ const WalletConnect = () => {
   return (
     <div className="App">
       <LandingPage onConnectWallet={handleConnectWallet} />
-      {showWalletModal && (
-        <WalletModal style={{background: 'rgba(0, 0, 0, 0.5)'}} onClose={() => setShowWalletModal(false)} />
-      )
-      }
+      <Phantom />
     </div>
   );
 };
