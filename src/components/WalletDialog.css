@@ -1,0 +1,129 @@
+.wallet-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  z-index: 1100;
+}
+
+.wallet-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(20, 20, 20, 0.95);
+  border: 1px solid #ff0000;
+  border-radius: 16px;
+  padding: 24px;
+  z-index: 1200;
+  min-width: 320px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.wallet-dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.wallet-dialog-header h2 {
+  color: #ffffff;
+  font-size: 1.5rem;
+  margin: 0;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.close-button {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.close-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.wallet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.wallet-option {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.wallet-option:hover {
+  background: rgba(255, 0, 0, 0.1);
+  border-color: #ff0000;
+  transform: translateY(-2px);
+}
+
+.wallet-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.wallet-info {
+  flex: 1;
+}
+
+.wallet-info h3 {
+  color: #ffffff;
+  margin: 0 0 4px 0;
+  font-size: 1.1rem;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.wallet-info p {
+  color: #999999;
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 480px) {
+  .wallet-dialog {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .wallet-option {
+    padding: 12px;
+  }
+
+  .wallet-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .wallet-info h3 {
+    font-size: 1rem;
+  }
+
+  .wallet-info p {
+    font-size: 0.8rem;
+  }
+}

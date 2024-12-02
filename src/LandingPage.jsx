@@ -12,6 +12,7 @@ import polygon from './assets/polygon.png';
 import avalanche from './assets/avalanche.png';
 import UnlimitedPotential from './components/UnlimitedPotential';
 import EarnCrypto from './scannetwork.jsx';
+import WalletDialog from './components/WalletDialog';
 
 const Navbar = ({ onConnectWallet }) => {
   return (
@@ -132,6 +133,7 @@ const WhatIsScanX = () => {
 
 const LandingPage = ({ onConnectWallet }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isWalletDialogOpen, setIsWalletDialogOpen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -142,17 +144,30 @@ const LandingPage = ({ onConnectWallet }) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const handleWalletSelect = (walletId) => {
+    console.log(`Selected wallet: ${walletId}`);
+    setIsWalletDialogOpen(false);
+    // Handle wallet connection based on the selected wallet
+    if (onConnectWallet) {
+      onConnectWallet(walletId);
+    }
+  };
+
+  const handleConnectWallet = () => {
+    setIsWalletDialogOpen(true);
+  };
+
   const renderMobileContent = () => {
     return (
       <div className="landing-container mobile-view">
-        <Navbar onConnectWallet={onConnectWallet} />
+        <Navbar onConnectWallet={handleConnectWallet} />
         
         <section className="mobile-hero">
           <h1>ScanX Network</h1>
           <p>Simplified Blockchain Scanning</p>
           <Countdown />
           
-          <button className="buy-button" onClick={onConnectWallet}>
+          <button className="buy-button" onClick={handleConnectWallet}>
             Connect Wallet
           </button>
         </section>
@@ -172,7 +187,7 @@ const LandingPage = ({ onConnectWallet }) => {
   const renderDesktopContent = () => {
     return (
       <div className="landing-container">
-        <Navbar onConnectWallet={onConnectWallet} />
+        <Navbar onConnectWallet={handleConnectWallet} />
         
         <div className="content-wrapper">
           <div className="left-section">
@@ -245,7 +260,18 @@ const LandingPage = ({ onConnectWallet }) => {
     );
   };
 
-  return isMobile ? renderMobileContent() : renderDesktopContent();
+  return (
+    <div>
+      {isMobile ? renderMobileContent() : renderDesktopContent()}
+      {isWalletDialogOpen && (
+        <WalletDialog
+          isOpen={isWalletDialogOpen}
+          onClose={() => setIsWalletDialogOpen(false)}
+          onSelectWallet={handleWalletSelect}
+        />
+      )}
+    </div>
+  );
 };
 
 export default LandingPage;
