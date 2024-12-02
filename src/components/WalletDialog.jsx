@@ -9,6 +9,29 @@ const WalletDialog = ({ isOpen, onClose, onSelectWallet }) => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [walletAddress, setWalletAddress] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
+  const [isPendingConnection, setIsPendingConnection] = useState(false);
+
+  const handleWalletConnection = async (accounts, walletId) => {
+    const address = walletId === 'phantom' 
+      ? accounts.toString() 
+      : accounts[0];
+    
+    setWalletAddress(address);
+    setIsConnected(true);
+    setIsPendingConnection(false);
+    onSelectWallet(walletId, address);
+    onClose();
+  };
+
+  const handleError = (error, walletName) => {
+    const errorMessage = error.code === 4001
+      ? "You rejected the connection request"
+      : `Could not connect to ${walletName}: ${error.message}`;
+    
+    setErrorMessage(errorMessage);
+    setIsConnected(false);
+    setIsPendingConnection(false);
+  };
 
   const connectWallet = async (walletId) => {
     console.log("connectWallet called with walletId:", walletId);
@@ -16,70 +39,57 @@ const WalletDialog = ({ isOpen, onClose, onSelectWallet }) => {
     setErrorMessage(null);
 
     try {
-      if (walletId === 'metamask') {
-        if (typeof window.ethereum !== "undefined") {
-          try {
+      switch (walletId) {
+        case 'metamask':
+        case 'coinbase':
+          if (typeof window.ethereum === "undefined") {
+            throw new Error(`${walletId === 'metamask' ? 'MetaMask' : 'Coinbase'} is not detected. Please install it.`);
+          }
+
+          // Check if already pending connection
+          if (isPendingConnection) {
+            const accounts = await window.ethereum.request({
+              method: "eth_accounts"
+            });
+            if (accounts.length > 0) {
+              await handleWalletConnection(accounts, walletId);
+            } else {
+              throw new Error("Please complete the connection in your wallet");
+            }
+          } else {
+            setIsPendingConnection(true);
             const accounts = await window.ethereum.request({
               method: "eth_requestAccounts"
             });
-            const address = accounts[0];
-            setWalletAddress(address);
-            setIsConnected(true);
-            onSelectWallet(walletId, address);
-            onClose();
-          } catch (error) {
-            if (error.code === 4001) {
-              setErrorMessage("You rejected the connection request");
-            } else {
-              setErrorMessage("Could not connect to MetaMask: " + error.message);
-            }
-            setIsConnected(false);
+            await handleWalletConnection(accounts, walletId);
           }
-        } else {
-          setErrorMessage("MetaMask is not detected. Please install MetaMask.");
-        }
-      } else if (walletId === 'coinbase') {
-        if (typeof window.ethereum !== "undefined") {
-          try {
-            const accounts = await window.ethereum.request({
-              method: "eth_requestAccounts"
-            });
-            const address = accounts[0];
-            setWalletAddress(address);
-            setIsConnected(true);
-            onSelectWallet(walletId, address);
-            onClose();
-          } catch (error) {
-            if (error.code === 4001) {
-              setErrorMessage("You rejected the connection request");
-            } else {
-              setErrorMessage("Could not connect to Coinbase: " + error.message);
-            }
-            setIsConnected(false);
+          break;
+
+        case 'phantom':
+          if (!window.solana) {
+            throw new Error("Phantom Wallet not found. Please install it.");
           }
-        } else {
-          setErrorMessage("Coinbase is not detected. Please install Coinbase.");
-        }
-      } else if (walletId === 'phantom') {
-        if (window.solana) {
-          try {
+          
+          if (isPendingConnection) {
+            const connection = await window.solana.connect({ onlyIfTrusted: true });
+            await handleWalletConnection(connection.publicKey, walletId);
+          } else {
+            setIsPendingConnection(true);
             const response = await window.solana.connect();
-            const address = response.publicKey.toString();
-            setWalletAddress(address);
-            setIsConnected(true);
-            onSelectWallet(walletId, address);
-            onClose();
-          } catch (err) {
-            console.error("Error connecting to Phantom Wallet:", err);
-            setErrorMessage("Failed to connect to Phantom: " + err.message);
-            setIsConnected(false);
+            await handleWalletConnection(response.publicKey, walletId);
           }
-        } else {
-          setErrorMessage("Phantom Wallet not found. Please install it.");
-        }
-      } else {
-        setErrorMessage("Unsupported wallet type.");
+          break;
+
+        default:
+          throw new Error("Unsupported wallet type.");
       }
+    } catch (error) {
+      const walletNames = {
+        metamask: 'MetaMask',
+        coinbase: 'Coinbase',
+        phantom: 'Phantom'
+      };
+      handleError(error, walletNames[walletId]);
     } finally {
       setLoadingWallet(null);
     }
@@ -88,11 +98,8 @@ const WalletDialog = ({ isOpen, onClose, onSelectWallet }) => {
   if (!isOpen) return null;
 
   const handleOverlayClick = (e) => {
-    // Prevent closing if a wallet is loading or dialog content is clicked
-    if (loadingWallet !== null || e.target === e.currentTarget) {
-      e.preventDefault();
-      e.stopPropagation();
-      return;
+    if (loadingWallet === null && e.target === e.currentTarget && !isPendingConnection) {
+      onClose();
     }
   };
 
@@ -117,51 +124,55 @@ const WalletDialog = ({ isOpen, onClose, onSelectWallet }) => {
     }
   ];
 
+  const getButtonText = (wallet) => {
+    if (loadingWallet === wallet.id) return 'Connecting...';
+    if (isPendingConnection && !isConnected) return 'Confirm in Wallet';
+    return `Connect ${wallet.name}`;
+  };
+
   return (
-    <>
+    <div 
+      className="wallet-dialog-overlay" 
+      onClick={handleOverlayClick}
+    >
       <div 
-        className="wallet-dialog-overlay" 
-        onClick={handleOverlayClick}
+        className="wallet-dialog" 
+        onClick={(e) => e.stopPropagation()}
       >
-        <div 
-          className="wallet-dialog" 
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className="wallet-dialog-header">
-            <h2>Connect Wallet</h2>
-            <button 
-              className="close-button" 
-              onClick={onClose}
-              disabled={loadingWallet !== null}
-            >×</button>
-          </div>
-          <div className="wallet-list">
-            {wallets.map((wallet) => (
-              <button
-                key={wallet.id}
-                className={`wallet-option ${loadingWallet === wallet.id ? 'loading' : ''}`}
-                onClick={() => connectWallet(wallet.id)}
-                disabled={loadingWallet !== null}
-              >
-                <img src={wallet.icon} alt={wallet.name} className="wallet-icon" />
-                <div className="wallet-info">
-                  <h3>{wallet.name}</h3>
-                  <p>{wallet.description}</p>
-                </div>
-                {loadingWallet === wallet.id && (
-                  <div className="loading-spinner"></div>
-                )}
-              </button>
-            ))}
-          </div>
-          {errorMessage && (
-            <div className="error-message">
-              {errorMessage}
-            </div>
-          )}
+        <div className="wallet-dialog-header">
+          <h2>Connect Wallet</h2>
+          <button 
+            className="close-button" 
+            onClick={onClose}
+            disabled={loadingWallet !== null || isPendingConnection}
+          >×</button>
         </div>
+        <div className="wallet-list">
+          {wallets.map((wallet) => (
+            <button
+              key={wallet.id}
+              className={`wallet-option ${loadingWallet === wallet.id ? 'loading' : ''} ${isPendingConnection ? 'pending' : ''}`}
+              onClick={() => connectWallet(wallet.id)}
+              disabled={loadingWallet !== null && loadingWallet !== wallet.id}
+            >
+              <img src={wallet.icon} alt={wallet.name} className="wallet-icon" />
+              <div className="wallet-info">
+                <h3>{wallet.name}</h3>
+                <p>{getButtonText(wallet)}</p>
+              </div>
+              {loadingWallet === wallet.id && (
+                <div className="loading-spinner"></div>
+              )}
+            </button>
+          ))}
+        </div>
+        {errorMessage && (
+          <div className="error-message">
+            {errorMessage}
+          </div>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 
