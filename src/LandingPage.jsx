@@ -14,7 +14,7 @@ import UnlimitedPotential from './components/UnlimitedPotential';
 import EarnCrypto from './scannetwork.jsx';
 import WalletDialog from './components/WalletDialog';
 
-const Navbar = ({ onConnectWallet }) => {
+const Navbar = ({ onConnectWallet, connectedWallet }) => {
   return (
     <nav className="navbar">
       <div className="logo">
@@ -27,7 +27,18 @@ const Navbar = ({ onConnectWallet }) => {
         <a href="#claim">Claim</a>
         <a href="#calculator">Calculator</a>
       </div>
-      <button className="connect-wallet" onClick={onConnectWallet}>Connect Wallet</button>
+      {connectedWallet ? (
+        <div className="wallet-connected">
+          <span className="connected-indicator">●</span>
+          <span className="wallet-address">
+            {connectedWallet.slice(0, 6)}...{connectedWallet.slice(-4)}
+          </span>
+        </div>
+      ) : (
+        <button className="connect-wallet" onClick={onConnectWallet}>
+          Connect Wallet
+        </button>
+      )}
     </nav>
   );
 };
@@ -131,7 +142,7 @@ const WhatIsScanX = () => {
   );
 };
 
-const LandingPage = ({ onConnectWallet }) => {
+const LandingPage = ({ onConnectWallet, connectedWallet }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [isWalletDialogOpen, setIsWalletDialogOpen] = useState(false);
 
@@ -160,7 +171,7 @@ const LandingPage = ({ onConnectWallet }) => {
   const renderMobileContent = () => {
     return (
       <div className="landing-container mobile-view">
-        <Navbar onConnectWallet={handleConnectWallet} />
+        <Navbar onConnectWallet={handleConnectWallet} connectedWallet={connectedWallet} />
         
         <section className="mobile-hero">
           <h1>ScanX Network</h1>
@@ -187,7 +198,7 @@ const LandingPage = ({ onConnectWallet }) => {
   const renderDesktopContent = () => {
     return (
       <div className="landing-container">
-        <Navbar onConnectWallet={handleConnectWallet} />
+        <Navbar onConnectWallet={handleConnectWallet} connectedWallet={connectedWallet} />
         
         <div className="content-wrapper">
           <div className="left-section">

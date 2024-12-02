@@ -789,3 +789,31 @@ body {
   backdrop-filter: blur(5px);
   z-index: 999;
 }
+
+.wallet-connected {
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 255, 0, 0.1);
+  border: 1px solid rgba(0, 255, 0, 0.3);
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.connected-indicator {
+  color: green;
+  margin-right: 8px;
+  font-size: 12px;
+  animation: pulse 1.5s infinite;
+}
+
+.wallet-address {
+  color: #fff;
+  font-weight: 500;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
